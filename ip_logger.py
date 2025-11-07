@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, send_from_directory
 import sqlite3
 from datetime import datetime
 from flask_cors import CORS
+from flask import send_file
 
 app = Flask(__name__)
 CORS(app)  # allow frontend to call backend
@@ -31,6 +32,15 @@ def save_ip(ip):
     conn.close()
 
 # ---------- Routes ----------
+
+
+@app.route("/download_db")
+def download_db():
+    return send_file(
+        "ip_log.db",
+        as_attachment=True
+    )
+
 @app.route("/log", methods=["GET"])
 def log_ip():
     forwarded = request.headers.get("X-Forwarded-For")
