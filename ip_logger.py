@@ -37,7 +37,7 @@ def save_ip(ip):
 @app.route("/download_db")
 def download_db():
     return send_file(
-        "ip_log.db",
+        "ips.db",
         as_attachment=True
     )
 
